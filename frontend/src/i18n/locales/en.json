@@ -1,0 +1,72 @@
+{
+  "app": { "name": "GENZURA", "tagline": "Smart Inventory Management" },
+  "nav": {
+    "dashboard": "Dashboard", "products": "Products", "stores": "Stores",
+    "categories": "Categories", "inventory": "Inventory", "reports": "Reports",
+    "notifications": "Notifications", "users": "Users", "settings": "Settings",
+    "aiInsights": "AI Insights", "logout": "Logout"
+  },
+  "auth": {
+    "login": "Login", "register": "Register", "logout": "Logout",
+    "email": "Email", "password": "Password", "fullName": "Full Name",
+    "whatsappNumber": "WhatsApp Number", "preferredLanguage": "Preferred Language",
+    "loginTitle": "Welcome back", "loginSubtitle": "Sign in to your account",
+    "registerTitle": "Create account", "registerSubtitle": "Start managing your inventory",
+    "forgotPassword": "Forgot password?", "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?"
+  },
+  "dashboard": {
+    "title": "Dashboard", "welcome": "Welcome back",
+    "totalProducts": "Total Products", "lowStock": "Low Stock",
+    "outOfStock": "Out of Stock", "totalValue": "Inventory Value",
+    "todayIn": "Today Stock In", "todayOut": "Today Stock Out",
+    "recentTransactions": "Recent Transactions", "stockMovement": "Stock Movement"
+  },
+  "products": {
+    "title": "Products", "addProduct": "Add Product", "editProduct": "Edit Product",
+    "name": "Product Name", "sku": "SKU", "barcode": "Barcode",
+    "quantity": "Quantity", "minStock": "Min Stock", "unitPrice": "Unit Price",
+    "sellingPrice": "Selling Price", "supplier": "Supplier", "category": "Category",
+    "store": "Store", "description": "Description", "image": "Image",
+    "lowStock": "Low Stock", "outOfStock": "Out of Stock", "inStock": "In Stock",
+    "search": "Search products...", "noProducts": "No products found"
+  },
+  "inventory": {
+    "title": "Inventory", "stockIn": "Stock In", "stockOut": "Stock Out",
+    "adjustment": "Adjustment", "quantity": "Quantity", "notes": "Notes",
+    "reference": "Reference No.", "history": "Transaction History",
+    "performedBy": "Performed By", "type": "Type", "previous": "Previous Qty",
+    "new": "New Qty"
+  },
+  "stores": {
+    "title": "Stores", "addStore": "Add Store", "name": "Store Name",
+    "location": "Location", "category": "Category", "manager": "Manager",
+    "description": "Description", "archived": "Archived", "active": "Active"
+  },
+  "reports": {
+    "title": "Reports", "daily": "Daily", "weekly": "Weekly",
+    "monthly": "Monthly", "yearly": "Yearly", "export": "Export",
+    "exportPDF": "Export PDF", "exportExcel": "Export Excel",
+    "stockMovement": "Stock Movement", "topProducts": "Top Products",
+    "deadStock": "Dead Stock", "lowStockReport": "Low Stock Report"
+  },
+  "common": {
+    "save": "Save", "cancel": "Cancel", "delete": "Delete", "edit": "Edit",
+    "view": "View", "search": "Search", "filter": "Filter", "loading": "Loading...",
+    "noData": "No data available", "confirm": "Confirm", "back": "Back",
+    "actions": "Actions", "status": "Status", "date": "Date", "all": "All",
+    "active": "Active", "inactive": "Inactive", "yes": "Yes", "no": "No",
+    "total": "Total", "page": "Page", "of": "of", "rows": "rows"
+  },
+  "notifications": {
+    "title": "Notifications", "lowStock": "Low Stock Alert",
+    "sent": "Sent", "failed": "Failed", "pending": "Pending",
+    "retry": "Retry Failed", "noNotifications": "No notifications"
+  },
+  "settings": {
+    "title": "Settings", "profile": "Profile", "language": "Language",
+    "theme": "Theme", "darkMode": "Dark Mode", "lightMode": "Light Mode",
+    "changePassword": "Change Password", "currentPassword": "Current Password",
+    "newPassword": "New Password"
+  }
+}

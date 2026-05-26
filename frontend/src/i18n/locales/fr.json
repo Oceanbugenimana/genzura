@@ -1,0 +1,41 @@
+{
+  "app": { "name": "GENZURA", "tagline": "Gestion d'inventaire moderne" },
+  "nav": {
+    "dashboard": "Tableau de bord", "products": "Produits", "stores": "Magasins",
+    "categories": "Catégories", "inventory": "Inventaire", "reports": "Rapports",
+    "notifications": "Notifications", "users": "Utilisateurs", "settings": "Paramètres",
+    "aiInsights": "Insights IA", "logout": "Déconnexion"
+  },
+  "auth": {
+    "login": "Connexion", "register": "S'inscrire", "logout": "Déconnexion",
+    "email": "Email", "password": "Mot de passe", "fullName": "Nom complet",
+    "loginTitle": "Bon retour", "loginSubtitle": "Connectez-vous à votre compte"
+  },
+  "dashboard": {
+    "title": "Tableau de bord", "totalProducts": "Total Produits",
+    "lowStock": "Stock Faible", "outOfStock": "Rupture de Stock",
+    "totalValue": "Valeur de l'inventaire"
+  },
+  "products": {
+    "title": "Produits", "addProduct": "Ajouter un produit",
+    "name": "Nom du produit", "quantity": "Quantité",
+    "search": "Rechercher des produits...", "noProducts": "Aucun produit trouvé"
+  },
+  "inventory": {
+    "title": "Inventaire", "stockIn": "Entrée de stock",
+    "stockOut": "Sortie de stock", "history": "Historique des transactions"
+  },
+  "common": {
+    "save": "Enregistrer", "cancel": "Annuler", "delete": "Supprimer", "edit": "Modifier",
+    "search": "Rechercher", "loading": "Chargement...", "noData": "Aucune donnée",
+    "actions": "Actions", "all": "Tous"
+  },
+  "notifications": {
+    "title": "Notifications", "lowStock": "Alerte stock faible",
+    "sent": "Envoyé", "failed": "Échoué", "pending": "En attente"
+  },
+  "settings": {
+    "title": "Paramètres", "language": "Langue", "theme": "Thème",
+    "changePassword": "Changer le mot de passe"
+  }
+}

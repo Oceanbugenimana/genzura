@@ -1,0 +1,41 @@
+{
+  "app": { "name": "GENZURA", "tagline": "Usimamizi wa Hisa wa Kisasa" },
+  "nav": {
+    "dashboard": "Dashibodi", "products": "Bidhaa", "stores": "Maduka",
+    "categories": "Makundi", "inventory": "Hesabu ya Hisa", "reports": "Ripoti",
+    "notifications": "Arifa", "users": "Watumiaji", "settings": "Mipangilio",
+    "aiInsights": "Maarifa ya AI", "logout": "Toka"
+  },
+  "auth": {
+    "login": "Ingia", "register": "Jisajili", "logout": "Toka",
+    "email": "Barua pepe", "password": "Nywila", "fullName": "Jina kamili",
+    "loginTitle": "Karibu tena", "loginSubtitle": "Ingia kwenye akaunti yako"
+  },
+  "dashboard": {
+    "title": "Dashibodi", "totalProducts": "Bidhaa Zote",
+    "lowStock": "Hisa Chache", "outOfStock": "Hisa Imeisha",
+    "totalValue": "Thamani ya Hisa"
+  },
+  "products": {
+    "title": "Bidhaa", "addProduct": "Ongeza Bidhaa",
+    "name": "Jina la Bidhaa", "quantity": "Idadi",
+    "search": "Tafuta bidhaa...", "noProducts": "Hakuna bidhaa zilizopatikana"
+  },
+  "inventory": {
+    "title": "Hesabu ya Hisa", "stockIn": "Ingiza Hisa",
+    "stockOut": "Toa Hisa", "history": "Historia ya Miamala"
+  },
+  "common": {
+    "save": "Hifadhi", "cancel": "Ghairi", "delete": "Futa", "edit": "Hariri",
+    "search": "Tafuta", "loading": "Inapakia...", "noData": "Hakuna data",
+    "actions": "Vitendo", "all": "Zote"
+  },
+  "notifications": {
+    "title": "Arifa", "lowStock": "Arifa ya Hisa Chache",
+    "sent": "Imetumwa", "failed": "Imeshindwa", "pending": "Inasubiri"
+  },
+  "settings": {
+    "title": "Mipangilio", "language": "Lugha", "theme": "Mandhari",
+    "changePassword": "Badilisha Nywila"
+  }
+}

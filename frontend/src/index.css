@@ -1,0 +1,291 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ═══════════════════════════════════════════════════════════
+   CSS VARIABLES — Dark / Light themes
+═══════════════════════════════════════════════════════════ */
+:root {
+  --bg-base:       #030712;
+  --bg-surface:    #0f172a;
+  --bg-elevated:   #1e293b;
+  --bg-hover:      #1e293b;
+  --border:        #1e293b;
+  --border-subtle: #0f172a;
+  --text-primary:  #f8fafc;
+  --text-secondary:#94a3b8;
+  --text-muted:    #475569;
+  --toast-bg:      #0f172a;
+  --toast-color:   #f8fafc;
+  --toast-border:  #1e293b;
+}
+
+[data-theme="light"] {
+  --bg-base:       #f8fafc;
+  --bg-surface:    #ffffff;
+  --bg-elevated:   #f1f5f9;
+  --bg-hover:      #f1f5f9;
+  --border:        #e2e8f0;
+  --border-subtle: #f1f5f9;
+  --text-primary:  #0f172a;
+  --text-secondary:#475569;
+  --text-muted:    #94a3b8;
+  --toast-bg:      #ffffff;
+  --toast-color:   #0f172a;
+  --toast-border:  #e2e8f0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE
+═══════════════════════════════════════════════════════════ */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    @apply font-sans antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg-surface); }
+  ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 99px; }
+  ::-webkit-scrollbar-thumb:hover { background: #7c3aed; }
+
+  input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px var(--bg-elevated) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COMPONENTS
+═══════════════════════════════════════════════════════════ */
+@layer components {
+
+  /* ── Cards ─────────────────────────────────────────────── */
+  .card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    @apply rounded-2xl p-6 shadow-sm transition-all duration-300;
+  }
+  .card-hover {
+    @apply card cursor-pointer;
+    &:hover {
+      border-color: rgba(124,58,237,0.4);
+      box-shadow: 0 8px 32px rgba(124,58,237,0.12);
+      transform: translateY(-2px);
+    }
+  }
+  .card-glass {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    @apply rounded-2xl;
+  }
+
+  /* ── Buttons ────────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-xl
+           transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 select-none
+           whitespace-nowrap;
+    focus-ring-offset-color: var(--bg-base);
+  }
+  .btn-sm  { @apply btn px-3 py-1.5 text-xs; }
+  .btn-md  { @apply btn px-4 py-2.5 text-sm; }
+  .btn-lg  { @apply btn px-6 py-3 text-base; }
+
+  .btn-primary {
+    @apply btn-md bg-gradient-to-r from-violet-600 to-indigo-600
+           hover:from-violet-500 hover:to-indigo-500 text-white
+           shadow-lg shadow-violet-500/25 focus:ring-violet-500;
+  }
+  .btn-secondary {
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    @apply btn-md hover:border-violet-500/40 focus:ring-violet-500;
+  }
+  .btn-success {
+    @apply btn-md bg-gradient-to-r from-emerald-600 to-teal-600
+           hover:from-emerald-500 hover:to-teal-500 text-white
+           shadow-lg shadow-emerald-500/25 focus:ring-emerald-500;
+  }
+  .btn-danger {
+    @apply btn-md bg-gradient-to-r from-red-600 to-rose-600
+           hover:from-red-500 hover:to-rose-500 text-white
+           shadow-lg shadow-red-500/25 focus:ring-red-500;
+  }
+  .btn-warning {
+    @apply btn-md bg-gradient-to-r from-amber-500 to-orange-500
+           hover:from-amber-400 hover:to-orange-400 text-white
+           shadow-lg shadow-amber-500/25 focus:ring-amber-500;
+  }
+  .btn-ghost {
+    color: var(--text-secondary);
+    @apply btn-md hover:text-white focus:ring-gray-500;
+    &:hover { background-color: var(--bg-elevated); }
+  }
+  .btn-icon {
+    color: var(--text-secondary);
+    @apply btn p-2 rounded-xl focus:ring-gray-500 transition-all duration-200;
+    &:hover {
+      color: var(--text-primary);
+      background-color: var(--bg-elevated);
+    }
+  }
+
+  /* ── Inputs ─────────────────────────────────────────────── */
+  .input {
+    width: 100%;
+    background-color: var(--bg-elevated);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    @apply rounded-xl px-4 py-2.5 text-sm
+           focus:outline-none focus:ring-2 focus:ring-violet-500/50 focus:border-violet-500
+           transition-all duration-200 placeholder:text-gray-500;
+  }
+  .input-sm { @apply input py-2 text-xs; }
+  .label {
+    color: var(--text-muted);
+    @apply block text-xs font-bold uppercase tracking-wider mb-1.5;
+  }
+  .error-msg { @apply text-red-400 text-xs mt-1.5 flex items-center gap-1; }
+
+  /* ── Badges ─────────────────────────────────────────────── */
+  .badge { @apply inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold; }
+  .badge-success { @apply badge bg-emerald-500/15 text-emerald-400 ring-1 ring-emerald-500/30; }
+  .badge-warning { @apply badge bg-amber-500/15  text-amber-400  ring-1 ring-amber-500/30; }
+  .badge-danger  { @apply badge bg-red-500/15    text-red-400    ring-1 ring-red-500/30; }
+  .badge-info    { @apply badge bg-blue-500/15   text-blue-400   ring-1 ring-blue-500/30; }
+  .badge-purple  { @apply badge bg-violet-500/15 text-violet-400 ring-1 ring-violet-500/30; }
+  .badge-teal    { @apply badge bg-teal-500/15   text-teal-400   ring-1 ring-teal-500/30; }
+  .badge-gray    { @apply badge ring-1; background-color: var(--bg-elevated); color: var(--text-secondary); ring-color: var(--border); }
+
+  /* ── Table ──────────────────────────────────────────────── */
+  .table-wrapper { @apply rounded-2xl overflow-hidden shadow-sm; border: 1px solid var(--border); background-color: var(--bg-surface); }
+  .table-header  { @apply px-4 py-3 text-left text-xs font-bold uppercase tracking-widest whitespace-nowrap; color: var(--text-muted); background-color: var(--bg-elevated); border-bottom: 1px solid var(--border); }
+  .table-cell    { @apply px-4 py-3.5 text-sm whitespace-nowrap; color: var(--text-secondary); }
+  .table-row     { border-bottom: 1px solid var(--border-subtle); transition: background-color 0.15s; }
+  .table-row:hover { background-color: var(--bg-hover); }
+  .table-row:last-child { border-bottom: none; }
+
+  /* ── Nav ────────────────────────────────────────────────── */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium
+           transition-all duration-200 cursor-pointer;
+    color: var(--text-muted);
+    &:hover { color: var(--text-primary); background-color: var(--bg-elevated); }
+  }
+  .nav-item-active {
+    @apply nav-item text-white;
+    background: linear-gradient(135deg, rgba(124,58,237,0.2), rgba(99,102,241,0.1));
+    border: 1px solid rgba(124,58,237,0.3);
+    box-shadow: 0 4px 16px rgba(124,58,237,0.1);
+  }
+
+  /* ── Divider ────────────────────────────────────────────── */
+  .divider { border-color: var(--border); @apply border-t my-4; }
+
+  /* ── Tooltip ────────────────────────────────────────────── */
+  .tooltip {
+    @apply absolute z-50 px-2.5 py-1.5 text-xs font-medium rounded-lg
+           bg-gray-900 text-white border border-gray-700 shadow-xl
+           pointer-events-none whitespace-nowrap;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════════════════════════ */
+@keyframes fadeIn        { from { opacity:0; transform:translateY(10px) } to { opacity:1; transform:translateY(0) } }
+@keyframes fadeInFast    { from { opacity:0 } to { opacity:1 } }
+@keyframes slideInLeft   { from { opacity:0; transform:translateX(-16px) } to { opacity:1; transform:translateX(0) } }
+@keyframes slideInRight  { from { opacity:0; transform:translateX(16px)  } to { opacity:1; transform:translateX(0) } }
+@keyframes slideInUp     { from { opacity:0; transform:translateY(16px)  } to { opacity:1; transform:translateY(0) } }
+@keyframes slideInDown   { from { opacity:0; transform:translateY(-16px) } to { opacity:1; transform:translateY(0) } }
+@keyframes scaleIn       { from { opacity:0; transform:scale(0.94) } to { opacity:1; transform:scale(1) } }
+@keyframes shimmer       { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+@keyframes float         { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+@keyframes pulse-glow    { 0%,100%{box-shadow:0 0 0 0 rgba(124,58,237,0.4)} 50%{box-shadow:0 0 0 8px rgba(124,58,237,0)} }
+@keyframes spin-slow     { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+@keyframes bounce-in     { 0%{transform:scale(0.3);opacity:0} 50%{transform:scale(1.05)} 70%{transform:scale(0.9)} 100%{transform:scale(1);opacity:1} }
+@keyframes count-up      { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+@keyframes progress-fill { from{width:0} to{width:var(--progress)} }
+@keyframes notification-in { from{opacity:0;transform:translateX(100%)} to{opacity:1;transform:translateX(0)} }
+
+.animate-fade-in      { animation: fadeIn 0.35s ease-out both; }
+.animate-fade-fast    { animation: fadeInFast 0.2s ease-out both; }
+.animate-slide-left   { animation: slideInLeft 0.3s ease-out both; }
+.animate-slide-right  { animation: slideInRight 0.3s ease-out both; }
+.animate-slide-up     { animation: slideInUp 0.3s ease-out both; }
+.animate-slide-down   { animation: slideInDown 0.3s ease-out both; }
+.animate-scale-in     { animation: scaleIn 0.25s cubic-bezier(0.175,0.885,0.32,1.275) both; }
+.animate-float        { animation: float 3s ease-in-out infinite; }
+.animate-pulse-glow   { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-spin-slow    { animation: spin-slow 8s linear infinite; }
+.animate-bounce-in    { animation: bounce-in 0.5s cubic-bezier(0.175,0.885,0.32,1.275) both; }
+.animate-notif-in     { animation: notification-in 0.4s cubic-bezier(0.175,0.885,0.32,1.275) both; }
+
+/* Stagger delays */
+.stagger-1 { animation-delay:0.05s }
+.stagger-2 { animation-delay:0.10s }
+.stagger-3 { animation-delay:0.15s }
+.stagger-4 { animation-delay:0.20s }
+.stagger-5 { animation-delay:0.25s }
+.stagger-6 { animation-delay:0.30s }
+
+/* Skeleton */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-elevated) 25%, var(--bg-hover) 50%, var(--bg-elevated) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  @apply rounded-xl;
+}
+
+/* Gradient text */
+.gradient-text         { @apply bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent; }
+.gradient-text-emerald { @apply bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent; }
+.gradient-text-amber   { @apply bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent; }
+
+/* Glow */
+.glow-violet  { box-shadow: 0 0 24px rgba(124,58,237,0.35); }
+.glow-emerald { box-shadow: 0 0 24px rgba(16,185,129,0.35); }
+.glow-amber   { box-shadow: 0 0 24px rgba(245,158,11,0.35); }
+.glow-red     { box-shadow: 0 0 24px rgba(239,68,68,0.35); }
+
+/* Progress bar */
+.progress-bar {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--bg-elevated);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 99px;
+  animation: progress-fill 1s ease-out both;
+}
+
+/* Notification panel slide */
+.notif-panel {
+  animation: slideInRight 0.35s cubic-bezier(0.175,0.885,0.32,1.275) both;
+}
+
+/* Light mode overrides */
+[data-theme="light"] .card-glass {
+  background: rgba(255,255,255,0.7);
+  border-color: rgba(0,0,0,0.08);
+}
+[data-theme="light"] .skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 200% 100%;
+}
+[data-theme="light"] .btn-primary { box-shadow: 0 4px 14px rgba(124,58,237,0.3); }
+[data-theme="light"] .table-row:hover { background-color: #f8fafc; }

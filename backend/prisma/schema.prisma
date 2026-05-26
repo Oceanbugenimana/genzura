@@ -1,0 +1,236 @@
+// GENZURA - Prisma Schema
+// Database: MySQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────
+// ENUMS
+// ─────────────────────────────────────────────
+
+enum Role {
+  ADMIN
+  STOCK_MANAGER
+  STAFF
+}
+
+enum TransactionType {
+  IN
+  OUT
+  ADJUSTMENT
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+  RETRYING
+}
+
+enum Language {
+  en
+  rw
+  sw
+  fr
+}
+
+// ─────────────────────────────────────────────
+// USER
+// ─────────────────────────────────────────────
+
+model User {
+  id               String    @id @default(uuid())
+  fullName         String    @map("full_name")
+  email            String    @unique
+  password         String
+  whatsappNumber   String?   @map("whatsapp_number")
+  preferredLang    Language  @default(en) @map("preferred_lang")
+  role             Role      @default(STAFF)
+  isActive         Boolean   @default(true) @map("is_active")
+  refreshToken     String?   @db.Text @map("refresh_token")
+  createdAt        DateTime  @default(now()) @map("created_at")
+  updatedAt        DateTime  @updatedAt @map("updated_at")
+  deletedAt        DateTime? @map("deleted_at")
+
+  // Relations
+  managedStores    Store[]           @relation("StoreManager")
+  transactions     StockTransaction[]
+  auditLogs        AuditLog[]
+  notifications    Notification[]
+
+  @@index([email])
+  @@index([role])
+  @@map("users")
+}
+
+// ─────────────────────────────────────────────
+// STORE
+// ─────────────────────────────────────────────
+
+model Store {
+  id          String    @id @default(uuid())
+  name        String
+  category    String?
+  location    String?
+  description String?   @db.Text
+  isArchived  Boolean   @default(false) @map("is_archived")
+  managerId   String?   @map("manager_id")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  // Relations
+  manager     User?      @relation("StoreManager", fields: [managerId], references: [id])
+  products    Product[]
+  auditLogs   AuditLog[]
+
+  @@index([managerId])
+  @@index([isArchived])
+  @@map("stores")
+}
+
+// ─────────────────────────────────────────────
+// CATEGORY
+// ─────────────────────────────────────────────
+
+model Category {
+  id          String    @id @default(uuid())
+  name        String    @unique
+  description String?
+  color       String?   @default("#6366f1")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  // Relations
+  products    Product[]
+
+  @@index([name])
+  @@map("categories")
+}
+
+// ─────────────────────────────────────────────
+// PRODUCT
+// ─────────────────────────────────────────────
+
+model Product {
+  id            String    @id @default(uuid())
+  name          String
+  sku           String    @unique
+  barcode       String?   @unique
+  description   String?   @db.Text
+  quantity      Int       @default(0)
+  minimumStock  Int       @default(10) @map("minimum_stock")
+  unitPrice     Decimal   @default(0) @db.Decimal(10, 2) @map("unit_price")
+  sellingPrice  Decimal   @default(0) @db.Decimal(10, 2) @map("selling_price")
+  supplier      String?
+  imageUrl      String?   @map("image_url")
+  isActive      Boolean   @default(true) @map("is_active")
+  categoryId    String?   @map("category_id")
+  storeId       String    @map("store_id")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  deletedAt     DateTime? @map("deleted_at")
+
+  // Relations
+  category      Category?          @relation(fields: [categoryId], references: [id])
+  store         Store              @relation(fields: [storeId], references: [id])
+  transactions  StockTransaction[]
+  notifications Notification[]
+
+  @@index([sku])
+  @@index([barcode])
+  @@index([storeId])
+  @@index([categoryId])
+  @@index([quantity])
+  @@map("products")
+}
+
+// ─────────────────────────────────────────────
+// STOCK TRANSACTION
+// ─────────────────────────────────────────────
+
+model StockTransaction {
+  id            String          @id @default(uuid())
+  productId     String          @map("product_id")
+  type          TransactionType
+  quantity      Int
+  previousQty   Int             @map("previous_qty")
+  newQty        Int             @map("new_qty")
+  notes         String?         @db.Text
+  performedById String          @map("performed_by")
+  referenceNo   String?         @map("reference_no")
+  createdAt     DateTime        @default(now()) @map("created_at")
+
+  // Relations
+  product       Product @relation(fields: [productId], references: [id])
+  performedBy   User    @relation(fields: [performedById], references: [id])
+
+  @@index([productId])
+  @@index([performedById])
+  @@index([type])
+  @@index([createdAt])
+  @@map("stock_transactions")
+}
+
+// ─────────────────────────────────────────────
+// AUDIT LOG
+// ─────────────────────────────────────────────
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  storeId    String?  @map("store_id")
+  action     String
+  entity     String
+  entityId   String   @map("entity_id")
+  oldValues  Json?    @map("old_values")
+  newValues  Json?    @map("new_values")
+  ipAddress  String?  @map("ip_address")
+  userAgent  String?  @db.Text @map("user_agent")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user       User   @relation(fields: [userId], references: [id])
+  store      Store? @relation(fields: [storeId], references: [id])
+
+  @@index([userId])
+  @@index([entity])
+  @@index([entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ─────────────────────────────────────────────
+// NOTIFICATION
+// ─────────────────────────────────────────────
+
+model Notification {
+  id          String             @id @default(uuid())
+  userId      String             @map("user_id")
+  productId   String?            @map("product_id")
+  type        String             @default("LOW_STOCK")
+  message     String             @db.Text
+  whatsappTo  String             @map("whatsapp_to")
+  status      NotificationStatus @default(PENDING)
+  retryCount  Int                @default(0) @map("retry_count")
+  sentAt      DateTime?          @map("sent_at")
+  errorMsg    String?            @db.Text @map("error_msg")
+  createdAt   DateTime           @default(now()) @map("created_at")
+  updatedAt   DateTime           @updatedAt @map("updated_at")
+
+  // Relations
+  user        User     @relation(fields: [userId], references: [id])
+  product     Product? @relation(fields: [productId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("notifications")
+}

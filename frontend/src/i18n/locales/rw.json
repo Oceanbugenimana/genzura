@@ -1,0 +1,48 @@
+{
+  "app": { "name": "GENZURA", "tagline": "Gucunga Ibicuruzwa Neza" },
+  "nav": {
+    "dashboard": "Imbonerahamwe", "products": "Ibicuruzwa", "stores": "Amaduka",
+    "categories": "Ibyiciro", "inventory": "Ububiko", "reports": "Raporo",
+    "notifications": "Imenyesha", "users": "Abakoresha", "settings": "Igenamiterere",
+    "aiInsights": "Ubwenge bwa AI", "logout": "Gusohoka"
+  },
+  "auth": {
+    "login": "Injira", "register": "Iyandikishe", "logout": "Gusohoka",
+    "email": "Imeyili", "password": "Ijambo ry'ibanga", "fullName": "Amazina yose",
+    "whatsappNumber": "Numero ya WhatsApp", "preferredLanguage": "Ururimi rwo guhitamo",
+    "loginTitle": "Murakaza neza", "loginSubtitle": "Injira muri konti yawe",
+    "registerTitle": "Fungura konti", "registerSubtitle": "Tangira gucunga ububiko bwawe"
+  },
+  "dashboard": {
+    "title": "Imbonerahamwe", "welcome": "Murakaza neza",
+    "totalProducts": "Ibicuruzwa byose", "lowStock": "Ububiko buke",
+    "outOfStock": "Nta bubiko", "totalValue": "Agaciro k'ububiko",
+    "todayIn": "Byinjiye uyu munsi", "todayOut": "Byasohowe uyu munsi"
+  },
+  "products": {
+    "title": "Ibicuruzwa", "addProduct": "Ongeraho igicuruzwa",
+    "name": "Izina ry'igicuruzwa", "sku": "SKU", "quantity": "Umubare",
+    "minStock": "Ububiko buke", "unitPrice": "Igiciro cy'igice",
+    "sellingPrice": "Igiciro cyo kugurisha", "supplier": "Umuguzi",
+    "search": "Shakisha ibicuruzwa...", "noProducts": "Nta bicuruzwa bibonetse"
+  },
+  "inventory": {
+    "title": "Ububiko", "stockIn": "Injiza mu bubiko", "stockOut": "Sohora mu bubiko",
+    "adjustment": "Hindura", "quantity": "Umubare", "notes": "Ibisobanuro",
+    "history": "Amateka y'ibikorwa"
+  },
+  "common": {
+    "save": "Bika", "cancel": "Reka", "delete": "Siba", "edit": "Hindura",
+    "search": "Shakisha", "loading": "Gutegereza...", "noData": "Nta makuru ahari",
+    "actions": "Ibikorwa", "status": "Imimerere", "date": "Itariki", "all": "Byose"
+  },
+  "notifications": {
+    "title": "Imenyesha", "lowStock": "Imenyesha ry'ububiko buke",
+    "sent": "Byoherejwe", "failed": "Byanze", "pending": "Bitegereje"
+  },
+  "settings": {
+    "title": "Igenamiterere", "profile": "Umwirondoro",
+    "language": "Ururimi", "theme": "Isura", "darkMode": "Umwijima",
+    "changePassword": "Hindura ijambo ry'ibanga"
+  }
+}
